@@ -1,3 +1,7 @@
+/* =============================================
+   VARIABLES
+   ============================================= */
+
 :root {
   /* Colors */
   --color-yellow:           #ffd900;
@@ -11,7 +15,7 @@
   --color-text:    #f1f5f9;
   --color-muted:   #94a3b8;
 
-  /* Borders — --border-accent reused for focus, hover, active states */
+  /* Borders */
   --border-default:      rgba(255, 255, 255, 0.12);
   --border-accent:       var(--color-yellow);
   --border-footer-faint: rgba(255, 217, 0, 0.06);
@@ -20,12 +24,12 @@
   --font-base: 'Inter', sans-serif;
 
   /* Radii */
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   16px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
 
   /* Spacing */
-  --space-page:  40px;
+  --space-page: 40px;
 
   /* Button */
   --btn-height:        40px;
@@ -58,7 +62,7 @@
   --stat-bg:           var(--color-surface);
   --stat-border:       var(--border-default);
   --stat-border-hover: var(--border-accent);
-  --stat-number-color: rgba(255, 217, 0, 0.45);
+  --stat-number-color: rgba(255, 210, 0, 0.75);
   --stat-label-color:  rgba(148, 163, 184, 0.50);
   --stat-radius:       var(--radius-lg);
 
@@ -69,7 +73,9 @@
 }
 
 
-/* === Base === */
+/* =============================================
+   RESET — remove default browser spacing
+   ============================================= */
 
 * {
   box-sizing: border-box;
@@ -95,28 +101,32 @@ img {
 }
 
 
-/* === Button === */
+/* =============================================
+   BUTTON
+   ============================================= */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: var(--btn-height);
+  padding: var(--btn-padding);
   background: var(--btn-bg);
   color: var(--btn-color);
   border: none;
   border-radius: var(--btn-radius);
   font-family: inherit;
-  font-weight: 800;
   font-size: var(--btn-font-size);
-  padding: var(--btn-padding);
-  height: var(--btn-height);
+  font-weight: 800;
   cursor: pointer;
+  transition: opacity 0.2s;
 }
 
 .btn:hover {
   opacity: var(--btn-hover-opacity);
 }
 
+/* Bigger version of the button */
 .btn.big {
   height: var(--btn-height-big);
   font-size: var(--btn-font-size-big);
@@ -125,7 +135,9 @@ img {
 }
 
 
-/* === Logo === */
+/* =============================================
+   LOGO
+   ============================================= */
 
 .logo {
   display: flex;
@@ -154,7 +166,9 @@ img {
 }
 
 
-/* === Header === */
+/* =============================================
+   HEADER
+   ============================================= */
 
 header {
   display: flex;
@@ -166,11 +180,12 @@ header {
   border-bottom: 1px solid var(--border-default);
   position: sticky;
   top: 0;
+  z-index: 50;
 }
 
+/* Hide nav by default — shown on desktop below */
 header nav {
   display: none;
-  gap: 32px;
 }
 
 header nav ul {
@@ -183,13 +198,15 @@ header nav ul li a {
   font-size: 14px;
   font-weight: 600;
   color: var(--color-muted);
+  transition: color 0.2s;
 }
 
-header nav ul li a:hover {
+header nav ul a:hover,
+header nav ul a.active {
   color: var(--color-yellow);
 }
 
-/* Mobile: nav as fixed bottom bar */
+/* On mobile: nav sticks to the bottom of the screen */
 @media (max-width: 767px) {
   header nav {
     display: flex;
@@ -218,6 +235,7 @@ header nav ul li a:hover {
   }
 }
 
+/* On desktop: show nav in the header */
 @media (min-width: 768px) {
   header nav {
     display: flex;
@@ -225,7 +243,175 @@ header nav ul li a:hover {
 }
 
 
-/* === Hero === */
+/* =============================================
+   SIGN-IN PANEL
+   ============================================= */
+
+/* Dark overlay behind the panel */
+.signin-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  cursor: default;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Panel — hidden by default, appears top-right */
+.signin-panel {
+  position: fixed;
+  top: 72px;
+  right: var(--space-page);
+  z-index: 100;
+  width: 340px;
+  background: var(--color-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  /* Hidden state — invisible and unclickable */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+/* Show panel and backdrop when checkbox is checked */
+#signin-toggle:checked ~ .signin-panel {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+#signin-toggle:checked ~ .signin-backdrop {
+  display: block;
+}
+
+/* X button to close the panel */
+.signin-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.signin-close:hover {
+  background: var(--color-yellow-dim);
+  color: var(--color-yellow);
+}
+
+.signin-panel h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Form inside the panel */
+.signin-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.signin-panel form input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.signin-panel form input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+.signin-panel form input:focus {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
+}
+
+/* Log in button */
+.signin-btn {
+  width: 100%;
+  height: 48px;
+  font-size: 15px;
+  border-radius: var(--radius-md);
+  margin-top: 4px;
+}
+
+/* Forgotten password link */
+.signin-forgot {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.signin-forgot:hover {
+  color: var(--color-yellow);
+}
+
+/* Thin line separating login and register */
+.signin-panel hr {
+  border: none;
+  border-top: 1px solid var(--border-default);
+  margin: 4px 0;
+}
+
+/* Create new account button */
+.signin-create {
+  width: 100%;
+  height: 48px;
+  font-size: 14px;
+  background: transparent;
+  color: var(--color-yellow);
+  border: 1.5px solid var(--color-yellow);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.signin-create:hover {
+  background: var(--color-yellow);
+  color: var(--color-bg);
+}
+
+/* On small screens: panel takes full width */
+@media (max-width: 480px) {
+  .signin-panel {
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+}
+
+
+/* =============================================
+   HERO
+   ============================================= */
 
 .hero {
   display: flex;
@@ -236,6 +422,7 @@ header nav ul li a:hover {
   margin: 0 auto;
 }
 
+/* Side by side on wide screens */
 @media (min-width: 960px) {
   .hero {
     flex-direction: row;
@@ -256,6 +443,7 @@ header nav ul li a:hover {
   line-height: 1.1;
 }
 
+/* Yellow highlighted words in the title */
 .hero-text h1 span {
   color: var(--color-yellow);
 }
@@ -266,6 +454,7 @@ header nav ul li a:hover {
   max-width: 500px;
 }
 
+/* "QUICK TRACK" label above the input */
 .track label {
   display: block;
   font-size: 11px;
@@ -276,6 +465,7 @@ header nav ul li a:hover {
   margin-bottom: 8px;
 }
 
+/* Tracking code input + search button */
 .track-input {
   display: flex;
   width: 100%;
@@ -315,6 +505,7 @@ header nav ul li a:hover {
   cursor: pointer;
 }
 
+/* Hero image on the right */
 .hero-img {
   flex: 1;
 }
@@ -328,15 +519,24 @@ header nav ul li a:hover {
 }
 
 
-/* === Stats === */
+/* =============================================
+   STATS
+   ============================================= */
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
   gap: 16px;
   padding: 24px var(--space-page);
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* 1 column on mobile */
+@media (max-width: 767px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
 }
 
 .stat {
@@ -346,22 +546,23 @@ header nav ul li a:hover {
   gap: 4px;
   padding: 24px;
   text-align: center;
+  background: var(--stat-bg);
   border: 1px solid var(--stat-border);
   border-radius: var(--stat-radius);
-  background: var(--stat-bg);
-  transition: border-color 0.2s, transform 0.2s;
   cursor: default;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
 .stat:hover {
-  border-color: var(--border-accent);
+  border-color: var(--stat-border-hover);
   transform: translateY(-3px);
 }
 
+/* Big number e.g. "5000+" */
 .stat strong {
   font-size: 36px;
   font-weight: 900;
-  color: var(--color-yellow-label);
+  color: var(--stat-number-color);
   transition: color 0.2s, font-size 0.2s;
 }
 
@@ -370,12 +571,13 @@ header nav ul li a:hover {
   font-size: 42px;
 }
 
+/* Label below the number e.g. "SHIPMENTS" */
 .stat span {
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--color-muted);
+  color: var(--stat-label-color);
   transition: color 0.2s;
 }
 
@@ -384,7 +586,9 @@ header nav ul li a:hover {
 }
 
 
-/* === Calculator === */
+/* =============================================
+   CALCULATOR
+   ============================================= */
 
 .calc {
   padding: 40px var(--space-page);
@@ -410,19 +614,24 @@ header nav ul li a:hover {
   padding: 24px;
 }
 
+/* Input fields grid */
 .fields {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* 1 column on mobile */
   gap: 16px;
   margin-bottom: 20px;
 }
 
 @media (min-width: 640px) {
-  .fields { grid-template-columns: repeat(2, 1fr); }
+  .fields {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+  }
 }
 
 @media (min-width: 960px) {
-  .fields { grid-template-columns: repeat(4, 1fr); }
+  .fields {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+  }
 }
 
 .field {
@@ -431,6 +640,7 @@ header nav ul li a:hover {
   gap: 6px;
 }
 
+/* Small uppercase label above each input */
 .field label {
   font-size: 11px;
   font-weight: 700;
@@ -448,6 +658,7 @@ header nav ul li a:hover {
   font-size: 14px;
   color: var(--color-text);
   outline: none;
+  transition: border-color 0.2s;
 }
 
 .field input:focus {
@@ -458,13 +669,16 @@ header nav ul li a:hover {
   color: var(--color-muted);
 }
 
+/* Push the button to the right */
 .calc form .btn {
   display: flex;
   margin-left: auto;
 }
 
 
-/* === Services === */
+/* =============================================
+   SERVICES
+   ============================================= */
 
 .services {
   padding: 40px var(--space-page);
@@ -483,6 +697,7 @@ header nav ul li a:hover {
   margin-bottom: 24px;
 }
 
+/* Service cards grid */
 .cards {
   display: grid;
   grid-template-columns: 1fr;
@@ -490,11 +705,15 @@ header nav ul li a:hover {
 }
 
 @media (min-width: 640px) {
-  .cards { grid-template-columns: repeat(2, 1fr); }
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 960px) {
-  .cards { grid-template-columns: repeat(3, 1fr); }
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .card {
@@ -502,16 +721,17 @@ header nav ul li a:hover {
   flex-direction: column;
   gap: 12px;
   padding: 24px;
+  background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--card-radius);
-  background: var(--card-bg);
   transition: border-color 0.2s;
 }
 
 .card:hover {
-  border-color: var(--border-accent);
+  border-color: var(--card-border-hover);
 }
 
+/* Icon in a yellow-tinted box */
 .card span {
   font-size: 32px;
   color: var(--card-icon-color);
@@ -522,6 +742,7 @@ header nav ul li a:hover {
   transition: background 0.2s, color 0.2s;
 }
 
+/* Icon turns yellow on hover */
 .card:hover span {
   background: var(--card-icon-bg-hover);
   color: var(--card-icon-color-hover);
@@ -539,7 +760,9 @@ header nav ul li a:hover {
 }
 
 
-/* === Footer === */
+/* =============================================
+   FOOTER
+   ============================================= */
 
 footer {
   border-top: 1px solid var(--border-default);
@@ -554,6 +777,7 @@ footer {
   margin: 0 auto 32px;
 }
 
+/* Logo + links side by side on desktop */
 @media (min-width: 960px) {
   .footer-top {
     flex-direction: row;
@@ -573,6 +797,7 @@ footer {
   font-size: 14px;
 }
 
+/* 3 link columns */
 .footer-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -590,12 +815,14 @@ footer {
   color: var(--color-muted);
   font-size: 14px;
   margin-bottom: 8px;
+  transition: color 0.2s;
 }
 
 .footer-links a:hover {
   color: var(--color-yellow);
 }
 
+/* Bottom bar with copyright */
 .footer-bottom {
   display: flex;
   flex-direction: column;
@@ -617,23 +844,4 @@ footer {
 .footer-bottom small {
   font-size: 13px;
   color: var(--color-muted);
-}
-
-.socials {
-  display: flex;
-  gap: 16px;
-}
-
-.socials a {
-  color: var(--color-muted);
-}
-
-.socials a:hover {
-  color: var(--color-yellow);
-}
-
-.socials svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
 }
