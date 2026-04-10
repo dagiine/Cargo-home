@@ -39,34 +39,6 @@ export default function home() {
       </article>
     </section>
 
-    <!-- Calculator -->
-    <section class="calc">
-      <h2>Тээврийн зардлын тооцоолуур</h2>
-      <p>Хятадаас Монголд ирэх ачаа тээврийн зардлаа шууд тооцоолж үзээрэй.</p>
-
-      <form>
-        <div class="fields">
-          <div class="field">
-            <label for="weight">Жин (kg)</label>
-            <input id="weight" type="number" placeholder="0.00" />
-          </div>
-          <div class="field">
-            <label for="length">Урт (cm)</label>
-            <input id="length" type="number" placeholder="0" />
-          </div>
-          <div class="field">
-            <label for="width">Өргөн (cm)</label>
-            <input id="width" type="number" placeholder="0" />
-          </div>
-          <div class="field">
-            <label for="height">Өндөр (cm)</label>
-            <input id="height" type="number" placeholder="0" />
-          </div>
-        </div>
-        <button type="submit" class="btn big">Тооцоолох</button>
-      </form>
-    </section>
-
     <!-- Services -->
     <section class="services">
       <h2>Дэвшилтэт логистикийн шийдлүүд</h2>

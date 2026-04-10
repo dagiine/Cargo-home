@@ -4,7 +4,6 @@ export default function track() {
     <p>Хяналтын код эсвэл утасны дугаараар захиалга хайх боломжтой.</p>
 
     <div class="form-wrapper">
-
       <input type="radio" name="track" id="tab-code" checked />
       <input type="radio" name="track" id="tab-phone" />
 
@@ -20,12 +19,15 @@ export default function track() {
       </div>
 
       <div class="form-box">
-
         <div class="tab-panel tab-panel--code">
           <label>
-            6 тэмдэгттэй хяналтын код
+            Хяналтын код (жишээ: MN-12345)
             <span class="material-symbols-outlined">qr_code_scanner</span>
-            <input type="text" placeholder="Жишээ: AB1234" maxlength="6" />
+            <input
+              id="track-code-input"
+              type="text"
+              placeholder="Жишээ: MN-12345"
+            />
           </label>
         </div>
 
@@ -33,17 +35,22 @@ export default function track() {
           <label>
             Утасны дугаар
             <span class="material-symbols-outlined">phone_iphone</span>
-            <input type="tel" placeholder="+976 XXXX XXXX" />
+            <input
+              id="track-phone-input"
+              type="tel"
+              placeholder="+976 XXXX XXXX"
+            />
           </label>
         </div>
 
-        <button type="submit">
+        <button type="button">
           <span class="material-symbols-outlined">search</span>
           Хайх
         </button>
-
       </div>
     </div>
+
+    <div id="track-results"></div>
 
     <div class="info-strip">
       <article>
