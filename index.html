@@ -1,193 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cash 4 Cargo</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-</head>
-<body>
+<html lang="mn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Checkbox toggle for sign-in panel -->
-  <input type="checkbox" id="signin-toggle" hidden />
+    <title>Cash 4 Cargo</title>
 
-  <header>
-    <a href="index.html" class="logo">
-      <span class="logo-icon">
-        <img src="logo.png" alt="Cash 4 Cargo Logo" />
-      </span>
-      Cash 4 Cargo
-    </a>
+    <link rel="stylesheet" href="./components/header.css" />
+    <link rel="stylesheet" href="./components/footer.css" />
+    <link rel="stylesheet" href="./styles.css" />
 
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="track.html">Track</a></li>
-        <li><a href="create-order.html">Create Order</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="support.html">Support</a></li>
-      </ul>
-    </nav>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
-    <!-- label acts as the Sign In button -->
-    <label for="signin-toggle" class="btn">Sign In</label>
-  </header>
+    <script type="module" src="./app.js"></script>
+  </head>
 
-  <!-- Sign-in panel -->
-  <div class="signin-panel">
-    <label for="signin-toggle" class="signin-close">
-      <span class="material-symbols-outlined">close</span>
-    </label>
-
-    <h2>Sign In</h2>
-
-    <form>
-      <input type="email" placeholder="Email address or mobile number" />
-      <input type="password" placeholder="Password" />
-      <button type="submit" class="btn signin-btn">Log in</button>
-      <a href="#" class="signin-forgot">Forgotten password?</a>
-      <hr />
-      <button type="button" class="btn signin-create">Create new account</button>
-    </form>
-  </div>
-
-  <!-- Backdrop to close panel by clicking outside -->
-  <label for="signin-toggle" class="signin-backdrop"></label>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-text">
-        <h1>China to Mongolia <span>Shipping Simplified</span></h1>
-        <p>Fast, secure, and transparent cargo solutions. The bridge between your business and the Mongolian market.</p>
-
-        <div class="track">
-          <label>Quick Track</label>
-          <div class="track-input">
-            <input type="text" placeholder="Enter Tracking Code (e.g. MN-12345)" />
-            <button>
-              <span class="material-symbols-outlined">search</span>
-            </button>
-          </div>
-        </div>
-
-        <a href="#" class="btn big">Create New Order</a>
-      </div>
-
-      <div class="hero-img">
-        <img src="hero-img.png" alt="Cargo warehouse"/>
-      </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="stats">
-      <article class="stat">
-        <strong>5000+</strong>
-        <span>Shipments</span>
-      </article>
-      <article class="stat">
-        <strong>1200+</strong>
-        <span>Clients</span>
-      </article>
-      <article class="stat">
-        <strong>3–7</strong>
-        <span>Delivery Days</span>
-      </article>
-    </section>
-
-    <!-- Calculator -->
-    <section class="calc">
-      <h2>Shipping Price Calculator</h2>
-      <p>Get an instant estimate for your shipment from China to Mongolia.</p>
-
-      <form>
-        <div class="fields">
-          <div class="field">
-            <label for="weight">Weight (kg)</label>
-            <input id="weight" type="number" placeholder="0.00" />
-          </div>
-          <div class="field">
-            <label for="length">Length (cm)</label>
-            <input id="length" type="number" placeholder="0" />
-          </div>
-          <div class="field">
-            <label for="width">Width (cm)</label>
-            <input id="width" type="number" placeholder="0" />
-          </div>
-          <div class="field">
-            <label for="height">Height (cm)</label>
-            <input id="height" type="number" placeholder="0" />
-          </div>
-        </div>
-        <button type="submit" class="btn big">Calculate Quote</button>
-      </form>
-    </section>
-
-    <!-- Services -->
-    <section class="services">
-      <h2>Premium Logistics Services</h2>
-      <p>We've optimized every mile of the journey to ensure your supply chain never stops.</p>
-
-      <div class="cards">
-        <article class="card">
-          <span class="material-symbols-outlined">bolt</span>
-          <h3>Fast Delivery</h3>
-          <p>Optimized routes and priority customs clearance ensure your goods arrive in record time across the border.</p>
-        </article>
-        <article class="card">
-          <span class="material-symbols-outlined">verified_user</span>
-          <h3>Secure Cargo</h3>
-          <p>Full insurance coverage and professional handling protocols for peace of mind from pickup to drop-off.</p>
-        </article>
-        <article class="card">
-          <span class="material-symbols-outlined">monitoring</span>
-          <h3>Real-time Tracking</h3>
-          <p>Advanced GPS monitoring and automated status updates so you always know exactly where your shipment is.</p>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="/" class="logo">
-          <span class="logo-icon">
-            <img src="logo.png" alt="Cash 4 Cargo Logo" />
-          </span>
-          China2MN Cargo
-        </a>
-        <p>The leading logistics provider specializing in seamless trade between China and Mongolia.</p>
-      </div>
-
-      <div class="footer-links">
-        <section>
-          <h4>Solutions</h4>
-          <a href="#">Air Freight</a>
-          <a href="#">Road Transport</a>
-          <a href="#">Warehousing</a>
-        </section>
-        <section>
-          <h4>Company</h4>
-          <a href="#">About Us</a>
-          <a href="#">Contact</a>
-          <a href="#">Careers</a>
-        </section>
-        <section>
-          <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookie Policy</a>
-        </section>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <small>© 2026 China2MN Cargo. All rights reserved.</small>
-    </div>
-  </footer>
-
-</body>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>
