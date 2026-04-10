@@ -43,7 +43,7 @@ export default function track() {
           </label>
         </div>
 
-        <button type="button">
+        <button type="submit">
           <span class="material-symbols-outlined">search</span>
           Хайх
         </button>

@@ -1,4 +1,4 @@
-export const SHIPMENTS_URL = "../data/data.json";
+export const SHIPMENTS_URL = "./data/data.json";
 
 export const STATUS_ORDER = [
   "Хятадын агуулахад",
