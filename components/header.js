@@ -48,10 +48,10 @@ function renderSignin() {
       <form>
         <input type="email" placeholder="Имэйл хаяг эсвэл утасны дугаар" />
         <input type="password" placeholder="Нууц үг" />
-        <button type="submit" class="btn signin-btn">Нэвтрэх</button>
+        <button type="submit" class="signin-btn">Нэвтрэх</button>
         <a href="#" class="signin-forgot">Нууц үгээ мартсан?</a>
         <hr />
-        <button type="button" class="btn signin-create">Шинэ хаяг үүсгэх</button>
+        <button type="button" class="signin-create">Шинэ хаяг үүсгэх</button>
       </form>
     </div>
   `;

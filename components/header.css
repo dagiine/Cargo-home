@@ -35,7 +35,6 @@ header nav ul a.active {
   color: var(--color-yellow);
 }
 
-/* --- Утасны хэмжээ: доод navbar --- */
 @media (max-width: 767px) {
 
   header nav {
@@ -65,7 +64,6 @@ header nav ul a.active {
 
 }
 
-/* --- Том дэлгэц: дээд navbar --- */
 @media (min-width: 768px) {
   header nav {
     display: flex;
@@ -173,7 +171,21 @@ header nav ul a.active {
   box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
 }
 
+
+.btn:hover {
+  opacity: var(--btn-hover-opacity);
+}
+
 .signin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+  font-weight: 600;
+  padding: var(--btn-padding);
+  cursor: pointer;
   width: 100%;
   height: 48px;
   font-size: 15px;
